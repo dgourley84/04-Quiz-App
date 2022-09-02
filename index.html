@@ -10,16 +10,67 @@
 </head>
 <body>
     <!-- Welcome to Quiz section -->
+    <div class="start_btn"><button>Start Quiz</button></div>
     <!-- information box for the rules of the quiz -->
+    <div class="info_box">
+        <div class="info-title"><span>Some Rules of this Quiz</span></div>
+        <div class="info-list">
+            <div class="info">1. You will have only <span>60 seconds</span> to complete this quiz.</div>
+            <div class="info">2. Once you select your answer, it can't be undone.</div>
+            <div class="info">3. If you get a qustion wrong then you will face a time penatly.</div>
+            <div class="info">4. You can't exit from the Quiz while you're playing.</div>
+            <div class="info">5. Enter your intials on the final score board.</div>
+        </div>
+        <div class="buttons">
+            <button class="quit">Exit Quiz</button>
+            <button class="restart">Continue</button>
+        </div>
+    </div>
+
+    
     <!-- quiz box with questions and timer -->
-        <!-- insert timer from JS -->
-        <!-- insert questions from JS -->
-        <!-- insert options from JS -->
-    <!-- footer of quiz box -->
-        <!-- insert quesiton count -->
+    <div class="quiz_box">
+        <header>
+            <div class="title">Quiz Application</div>
+            <div class="timer">
+                <!-- insert timer from JS -->
+                <div class="time_left_txt">Time Left</div>
+                <div class="timer_sec">60</div>
+            </div>
+            <div class="time_line"></div>
+        </header>
+        <section>
+            <div class="que_text">
+                 <!-- insert questions from JS -->
+            </div>
+            <div class="option_list">
+                <!-- insert options from JS -->
+            </div>
+        </section>
+        <!-- footer of quiz box -->
+        <footer>
+            <div class="total_que">
+            <!-- insert quesiton count -->
+            </div>
+            <button class="next_btn">Next Question</button>
+        </footer>
+    </div>
     <!-- results box -->
+    <div class="result_box">
+        <div class="icon">
+            <i class="fas fa-crown"></i>
+        </div>
+        <div class="complete_text">You've completed the Quiz!</div>
+        <div class="score_text">
         <!-- insert score result from JS -->
-    <!-- replay or quit function -->
+        </div>
+        <div class="buttons">
+            <!-- replay or quit function -->
+            <button class="restart">Replay Quiz</button>
+            <button class="quit">Quit Quiz</button>
+        </div>
+    </div>
+
 
     <!-- jscript link -->
     <script src="./assets/JS/script.js"></script>
