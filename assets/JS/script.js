@@ -32,7 +32,7 @@ continue_btn.addEventListener("click",
     showQuestions(),
     //start the timer
     startTimer(60)  
-)
+);
 
 
 
@@ -66,19 +66,19 @@ function startTimer (time){
             timeText.textContent = "Time Epired";
         }
     }
-}
+};
 
 function showRules(){
     info_box.classList.add("activeInfo")
-    }
+    };
 
 function hideRules(){
     info_box.classList.remove("activeInfo")
-}
+;}
 
 function showQuizbox (){
     quiz_box.classList.add("activeQuiz")
-}
+};
 
 function showQuestions (index) {
     const que_text = document.querySelector(".que_text");
@@ -96,9 +96,9 @@ function showQuestions (index) {
     for (i=0; i< option.length; i++){
         option[i].setAttribute("onclick", "optionSelected(this)");
     }
-}
+};
 
 function queCounter (index){
     let totalQueCounTag = '<span><p>' + index + '</p> of <p>' + questions.length +'</p> Questions</span>';
     bottom_ques_counter.innerHTML = totalQueCounTag;
-}
+};
