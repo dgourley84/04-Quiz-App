@@ -70,11 +70,11 @@ function startTimer (time){
 
 function showRules(){
     info_box.classList.add("activeInfo")
-    };
+};
 
 function hideRules(){
     info_box.classList.remove("activeInfo")
-;}
+};
 
 function showQuizbox (){
     quiz_box.classList.add("activeQuiz")
