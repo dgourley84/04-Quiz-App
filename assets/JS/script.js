@@ -27,11 +27,11 @@ continue_btn.addEventListener("click",
     //hide the rules & show quiz box
     hideRules();
     showQuizbox();
-    //start the timer
-    startTimer(60);
     //show question number
+    queCounter();   
     showQuestions();
-    queCounter();    
+    //start the timer
+    startTimer(60);  
 );
 
 
