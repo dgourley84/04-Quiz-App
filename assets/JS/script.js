@@ -14,25 +14,25 @@ const timeCount = document.querySelector(".timer .timer_sec");
 
 // if start button clicked - show infobox with rules
 start_btn.addEventListener("click",
-    showRules();
+    showRules()
 );
 
 // if exitQuiz button clicked
 exit_btn.addEventListener("click", 
-    hideRules();
+    hideRules()
 );
 
 // if continue quiz button clicked
 continue_btn.addEventListener("click",
     //hide the rules & show quiz box
-    hideRules();
-    showQuizbox();
+    hideRules(),
+    showQuizbox(),
     //show question number
-    queCounter();   
-    showQuestions();
+    queCounter(),
+    showQuestions(),
     //start the timer
-    startTimer(60);  
-);
+    startTimer(60)  
+)
 
 
 
@@ -61,7 +61,7 @@ function startTimer (time){
             timeCount.textContent = "0" + addZero;
         }
         //if time reaches zero then put up a message that time has expired
-        if time > 0){
+        if (time > 0){
             clearInterval(counter);
             timeText.textContent = "Time Epired";
         }
@@ -84,7 +84,7 @@ function showQuestions (index) {
     const que_text = document.querySelector(".que_text");
     
     let que_tag = '<span>' + questions[index].numb + ". " + questions[index].question + '</span>';
-    let option_tag = '<div class="option"><span>' + questions.[index].options[0] + '</span></div>'
+    let option_tag = '<div class="option"><span>' + questions[index].options[0] + '</span></div>'
     + '<div class="option"><span>' + questions[index].options[1] + '</span></div>'
     + '<div class="option"><span>' + questions[index].options[2] + '</span></div>'
     + '<div class="option"><span>' + questions[index].options[3] + '</span></div>';
