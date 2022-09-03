@@ -14,16 +14,12 @@ const timeCount = document.querySelector(".timer .timer_sec");
 
 // if start button clicked - show infobox with rules
 start_btn.addEventListener("click",
-    function showRules(){
-        info_box.classList.add("activeInfo")
-        }
+    showRules();
 );
 
 // if exitQuiz button clicked
 exit_btn.addEventListener("click", 
-    function hideRules(){
-        info_box.classList.remove("activeInfo")
-    }
+    hideRules();
 );
 
 // if continue quiz button clicked
@@ -35,9 +31,7 @@ continue_btn.addEventListener("click",
     startTimer(60);
     //show question number
     showQuestions();
-    queCounter();
-
-    
+    queCounter();    
 );
 
 
@@ -73,6 +67,10 @@ function startTimer (time){
         }
     }
 }
+
+function showRules(){
+    info_box.classList.add("activeInfo")
+    }
 
 function hideRules(){
     info_box.classList.remove("activeInfo")
