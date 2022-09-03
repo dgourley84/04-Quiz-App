@@ -10,75 +10,97 @@ const time_line = document.querySelector("header .time_line");
 const timeText = document.querySelector(".timer .time_left_txt");
 const timeCount = document.querySelector(".timer .timer_sec");
 
-// creating an array and passing the number, questions, options, and answers
-let questions = [
-    {
-    numb: 1,
-    question: "What does HTML stand for?",
-    answer: "Hyper Text Markup Language",
-    options: [
-      "Hyper Text Preprocessor",
-      "Hyper Text Markup Language",
-      "Hyper Text Multiple Language",
-      "Hyper Tool Multi Language"
-    ]
-  },
-    {
-    numb: 2,
-    question: "What does CSS stand for?",
-    answer: "Cascading Style Sheet",
-    options: [
-      "Common Style Sheet",
-      "Colorful Style Sheet",
-      "Computer Style Sheet",
-      "Cascading Style Sheet"
-    ]
-  },
-    {
-    numb: 3,
-    question: "What does PHP stand for?",
-    answer: "Hypertext Preprocessor",
-    options: [
-      "Hypertext Preprocessor",
-      "Hypertext Programming",
-      "Hypertext Preprogramming",
-      "Hometext Preprocessor"
-    ]
-  },
-    {
-    numb: 4,
-    question: "What does SQL stand for?",
-    answer: "Structured Query Language",
-    options: [
-      "Stylish Question Language",
-      "Stylesheet Query Language",
-      "Statement Question Language",
-      "Structured Query Language"
-    ]
-  },
-    {
-    numb: 5,
-    question: "What does XML stand for?",
-    answer: "eXtensible Markup Language",
-    options: [
-      "eXtensible Markup Language",
-      "eXecutable Multiple Language",
-      "eXTra Multi-Program Language",
-      "eXamine Multiple Language"
-    ]
-  },
-  // you can uncomment the below codes and make duplicate as more as you want to add question
-  // but remember you need to give the numb value serialize like 1,2,3,5,6,7,8,9.....
-  //   {
-  //   numb: 6,
-  //   question: "Your Question is Here",
-  //   answer: "Correct answer of the question is here",
-  //   options: [
-  //     "Option 1",
-  //     "option 2",
-  //     "option 3",
-  //     "option 4"
-  //   ]
-  // },
-];
+//functions that may be called
 
+// if start button clicked - show infobox with rules
+start_btn.addEventListener("click",
+    function showRules(){
+        info_box.classList.add("activeInfo")
+        }
+);
+
+// if exitQuiz button clicked
+exit_btn.addEventListener("click", 
+    function hideRules(){
+        info_box.classList.remove("activeInfo")
+    }
+);
+
+// if continue quiz button clicked
+continue_btn.addEventListener("click",
+    //hide the rules & show quiz box
+    hideRules();
+    showQuizbox();
+    //start the timer
+    startTimer(60);
+    //show question number
+    showQuestions();
+    queCounter();
+
+    
+);
+
+
+
+// if restart button clicked
+
+//if quitQuiz button clicked
+
+// if next question button clicked
+
+// getting questions and options from array above
+
+// new div tags for icons
+
+//if user clicks option
+
+// timmer function
+
+function startTimer (time){
+    var counter = setInterval(timer,1000);
+    function timer (){
+        timeCount.textContent = time; 
+        time--;
+        //if the time is under 10 seconds then put 0 in front so presents as "09" or "08"
+        if(time < 9){
+            let addZero = timeCount.textContent;
+            timeCount.textContent = "0" + addZero;
+        }
+        //if time reaches zero then put up a message that time has expired
+        if time > 0){
+            clearInterval(counter);
+            timeText.textContent = "Time Epired";
+        }
+    }
+}
+
+function hideRules(){
+    info_box.classList.remove("activeInfo")
+}
+
+function showQuizbox (){
+    quiz_box.classList.add("activeQuiz")
+}
+
+function showQuestions (index) {
+    const que_text = document.querySelector(".que_text");
+    
+    let que_tag = '<span>' + questions[index].numb + ". " + questions[index].question + '</span>';
+    let option_tag = '<div class="option"><span>' + questions.[index].options[0] + '</span></div>'
+    + '<div class="option"><span>' + questions[index].options[1] + '</span></div>'
+    + '<div class="option"><span>' + questions[index].options[2] + '</span></div>'
+    + '<div class="option"><span>' + questions[index].options[3] + '</span></div>';
+    que_text.innerHTML = que_tag;
+    option_list.innerHTML = option_tag;
+
+    const option = option_list.querySelectorAll(".option");
+
+    for (i=0; i< option.length; i++){
+        option[i].setAttribute("onclick", "optionSelected(this)");
+    }
+}
+
+function queCounter (index){
+    let totalQueCounTag = '<span><p>' + index + '</p> of <p>' + questions.length +'</p> Questions</span>';
+    bottom_ques_counter.innerHTML = totalQueCounTag;
+}
