@@ -81,7 +81,6 @@ continue_btn.addEventListener('click', function(event){
 
 //if user clicked on option
 function optionSelected(answer){
-    clearInterval(counter); //clear counter
     let userAns = answer.textContent; //getting user selected option
     let correcAns = questions[que_count].answer; //getting correct answer from array
     const allOptions = option_list.children.length; //getting all option items
@@ -99,7 +98,7 @@ function optionSelected(answer){
         answer.classList.add("incorrect"); //adding red color to correct selected option
         console.log("Wrong Answer");
         //deduct 10 seconds from timer
-        let timeReduction = -10;         
+        timeValue -=10;         
     
 
         for(i=0; i < allOptions; i++){
