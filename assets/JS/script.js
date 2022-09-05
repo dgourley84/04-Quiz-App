@@ -19,8 +19,20 @@ let userScore = 0;
 let counter;
 let counterLine
 let withValue = 0;
-let tickIconTag = '<div class="icon tick"><i class="fas fa-check"></i></div>';
-let crossIconTag = '<div class="icon cross"><i class="fas fa-times"></i></div>';
+
+
+function queCounter(index){
+    //show question number and progressions
+    let totalQueCounTag = '<span><p>'+ index +'</p> of <p>'+ questions.length +'</p> Questions</span>';
+    bottom_ques_counter.innerHTML = totalQueCounTag;  //adding new span tag inside bottom_ques_counter
+};
+
+function startTimer(time){
+    counter = setInterval(function timer (){
+        timeCount.textContent = time;
+        time --;
+    },1000);
+};
 
 function showQuetions(index){
     const que_text = document.querySelector(".que_text");
@@ -34,23 +46,10 @@ function showQuetions(index){
     option_list.innerHTML = option_tag; //adding new div tag inside option_tag
     
     const option = option_list.querySelectorAll(".option");
+    
     // set onclick attribute to all available options
     for(i=0; i < option.length; i++){
         option[i].setAttribute("onclick", "optionSelected(this)");
-    }
-};
-
-function queCounter(index){
-    //show question number and progressions
-    let totalQueCounTag = '<span><p>'+ index +'</p> of <p>'+ questions.length +'</p> Questions</span>';
-    bottom_ques_counter.innerHTML = totalQueCounTag;  //adding new span tag inside bottom_ques_counter
-};
-
-function startTimer(time){
-    counter = setInterval(timer,1000);
-    function timer (){
-        timeCount.textContent = time;
-        time --;
     }
 };
 
@@ -75,20 +74,46 @@ continue_btn.addEventListener('click', function(event){
     showQuetions(que_count); //calling the showQuestions function
     queCounter(que_numb); //calling question number counter
     startTimer(timeValue);// start timer
-    startTimerLine(0);
 });
 
+//if user clicked on option
+function optionSelected(answer){
+    clearInterval(counter); //clear counter
+    let userAns = answer.textContent; //getting user selected option
+    let correcAns = questions[que_count].answer; //getting correct answer from array
+    const allOptions = option_list.children.length; //getting all option items
+    
+    //when an anwer is clicked
+    //check if the choice is correct or not
+    if(userAns === correcAns){ 
+        //if correct
+        //display correct feed back
+        answer.classList.add("correct"); 
+        console.log("Correct Answer");
+    } //if wrong 
+        else{
+        //display wrong answer feedback
+        answer.classList.add("incorrect"); //adding red color to correct selected option
+        console.log("Wrong Answer");
+        //deduct 10 seconds from timer
+        console.log(counter);
+    
 
-//when an anwer is clicked
-//check if the choice is correct or not
+        for(i=0; i < allOptions; i++){
+            if(option_list.children[i].textContent == correcAns){ //if there is an option which is matched to an array answer 
+                option_list.children[i].setAttribute("class", "option correct"); //adding green color to matched option
+                console.log("Auto selected correct answer.");
+            }
+        }
+    }
+    for(i=0; i < allOptions; i++){
+        option_list.children[i].classList.add("disabled"); //once user select an option then disabled all options
+    }
+    next_btn.classList.add("show"); //show the next button if user selected any option
+}
 
-//if correct
-//display correct feed back
-//move to next question
+//next question function
 
-//if wrong 
-//display wrong answer feedback
-//deduct 10 seconds from timer
 
 //if deducting time and time becomes negative then
 // -- end game function
