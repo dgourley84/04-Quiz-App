@@ -19,6 +19,7 @@ let userScore = 0;
 let counter;
 let counterLine
 let withValue = 0;
+let time;
 
 
 function queCounter(index){
@@ -29,8 +30,8 @@ function queCounter(index){
 
 function startTimer(time){
     counter = setInterval(function timer (){
-        timeCount.textContent = time;
-        time --;
+        timeCount.textContent = timeValue;
+        timeValue --;
     },1000);
 };
 
@@ -76,6 +77,8 @@ continue_btn.addEventListener('click', function(event){
     startTimer(timeValue);// start timer
 });
 
+
+
 //if user clicked on option
 function optionSelected(answer){
     clearInterval(counter); //clear counter
@@ -96,7 +99,7 @@ function optionSelected(answer){
         answer.classList.add("incorrect"); //adding red color to correct selected option
         console.log("Wrong Answer");
         //deduct 10 seconds from timer
-        console.log(counter);
+        let timeReduction = -10;         
     
 
         for(i=0; i < allOptions; i++){
@@ -113,7 +116,16 @@ function optionSelected(answer){
 }
 
 //next question function
-
+next_btn.addEventListener('click', function(event){
+    if(que_count<questions.length -1){
+        que_count++;
+        que_numb++;
+        showQuetions(que_count);
+        queCounter(que_numb);
+        next_btn.classList.remove("show");
+    } else
+        showResult();
+});
 
 //if deducting time and time becomes negative then
 // -- end game function
