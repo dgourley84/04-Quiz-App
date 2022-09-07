@@ -200,7 +200,6 @@ result_form.addEventListener("submit", function(event){
     intialsUser_Input.value = "";
     storeScorelist();
     renderScorelist();
-
 });
 
 
