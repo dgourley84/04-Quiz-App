@@ -66,11 +66,27 @@
         </div>
         <div class="buttons">
             <!-- replay or quit function -->
-            <button class="restart">Replay Quiz</button>
-            <button class="quit">Quit Quiz</button>
+            <button class="logScore">Replay Quiz</button>
+            <button class="logScore">Quit Quiz</button>            
         </div>
     </div>
 
+    <div class="form_container">
+        <form id="results_form">
+            <div class="form_group">
+                <label for="userIntials">Intials</label>
+                <input type="text" class="form_control" id="userInitials">
+            <button type="submit" class="submit_button">Submit</button>
+            </div>
+        </form>
+    </div>
+
+
+    <div class="scoreboard">
+        <h3>Quiz Scoreboard</h3>
+        <p>Scores:<span id="scoreListCount">0</span></p>
+        <ol id="score_list"></ol>
+    </div>
 
     <!-- jscript link -->
     <script src="./assets/JS/questions.js"></script>
