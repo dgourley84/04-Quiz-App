@@ -130,13 +130,13 @@ function optionSelected(answer){
 //next question function
 next_btn.addEventListener('click', function(event){
     if(que_count<questions.length -1){
-        que_count++;
-        que_numb++;
-        showQuetions(que_count);
-        queCounter(que_numb);
-        next_btn.classList.remove("show");
+        que_count++;//add to qustion count to pull next question
+        que_numb++; // add to the question number 
+        showQuetions(que_count); // pulls the next question based on the count number
+        queCounter(que_numb); // displays next number on question list
+        next_btn.classList.remove("show");//removes next button
     } else
-        showResult();
+        showResult();//will show the result of the quiz
 });
 
 function showResult(){
@@ -166,67 +166,36 @@ function showResult(){
     }
 };
 
-function storeScorelist (){
-    localStorage.setItem("scoreList", JSON.stringify(scoreList));
-}
+// function storeScorelist (){
+//     localStorage.setItem("scoreList", JSON.stringify(scoreList));
+// }
 
-function renderScorelist(){
-    score_List_results.innerHTML = "";
-    score_List_count.textContent = scoreList.length;
-    for (var i=0; i < scoreList.length; i++){
-        var nameList = scoreList[i];
-        var li = document.createElement("li");
-        li.textContent = nameList;
-        li.setAttribute("data-index",i);
-        scoreList.appendChild(li);
-    }
-}
-
-
-result_form.addEventListener("submit", function(event){
-    result_box.classList.remove("activeResult");
-    form_container.classList.add("activeForm");
-    event.preventDefault();
-    //show alert, tell the user to type in an input
-    var intialsUser = intialsUser_Input.value.trim();
-    var resultTime_score = resultTime;
-    console.log("Initials", intialsUser);
-    //if the user types in something and clicks submit
-    if(!intialsUser) {
-    return;
-    };
-//stor the user intial and high score in local storage
-    scoreList.push(intialsUser,resultTime);
-    intialsUser_Input.value = "";
-    storeScorelist();
-    renderScorelist();
-});
+// function renderScorelist(){
+//     score_List_results.innerHTML = "";
+//     score_List_count.textContent = scoreList.length;
+//     for (var i=0; i < scoreList.length; i++){
+//         var nameList = scoreList[i];
+//         var li = document.createElement("li");
+//         li.textContent = nameList;
+//         li.setAttribute("data-index",i);
+//         scoreList.appendChild(li);
+//     }
+// }
 
 
-//if deducting time and time becomes negative then
-// -- end game function
+// result_form.addEventListener("submit", function(event){
+//     result_box.classList.remove("activeResult");
+//     form_container.classList.add("activeForm");
+//     event.preventDefault();
+//     //show alert, tell the user to type in an input
+//     var intialsUser = intialsUser_Input.value.trim();
+//         console.log("Initials", intialsUser);
+//     //if the user types in something and clicks submit
+//     if(!intialsUser) {
+//     return;
+//     };
+//     //store the user intial and high score in local storage
+// });
 
-// if time remaining is positive move to next question
-
-//click on answer in last question then
-//run end game function
-
-
-// end game
-//show the end game page
-
-
-
-//end game section
-//if the user click on submit without input
-
-
-
-//hide the end game page
-//show the highscore page
-
-// high score page
-//show all the previous highscores
-//grab data from local storage
 
 //when user click on return to home -- redirect them to start page
