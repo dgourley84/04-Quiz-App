@@ -5,22 +5,32 @@ const exit_btn = info_box.querySelector(".buttons .quit");
 const continue_btn = info_box.querySelector(".buttons .restart");
 const quiz_box = document.querySelector(".quiz_box");
 const result_box = document.querySelector(".result_box");
+const form_container =document.querySelector("form_containter");
 const option_list = document.querySelector(".option_list");
 const time_line = document.querySelector("header .time_line");
 const timeText = document.querySelector(".timer .time_left_txt");
 const timeCount = document.querySelector(".timer .timer_sec");
 const next_btn = document.querySelector("footer .next_btn");
 const bottom_ques_counter = document.querySelector("footer .total_que");
+const logScore_btn = document.querySelector(".buttons .logScore");
+const scoreCount = 10;
+const result_form = document.querySelector("#results_form");
+const intials_input = document.querySelector("#userInitials");
+
 
 let timeValue = 60;
 let que_count = 0;
 let que_numb = 1;
-let userScore = 0;
+let userScore5;
 let counter;
 let counterLine
 let withValue = 0;
 let time;
-
+let resultTime = timeValue
+let scoreList = [];
+let intialsUser_Input = document.getElementById("userInitials");
+let score_List_results = document.getElementById("score_list");
+let score_List_count = document.getElementById("scoreListCount");
 
 function queCounter(index){
     //show question number and progressions
@@ -54,12 +64,15 @@ function showQuetions(index){
     }
 };
 
+function stopTimer(time){
+    clearInterval;
+};
 
 // when the start game button is clicked
 start_btn.addEventListener('click', function(event){
     //show rules and do you want to start the quiz
     info_box.classList.add("activeInfo"); 
-});
+    });
 // when exit quiz button clicked
 exit_btn.addEventListener('click', function(event){
     //return to landing page
@@ -117,39 +130,72 @@ function optionSelected(answer){
 //next question function
 next_btn.addEventListener('click', function(event){
     if(que_count<questions.length -1){
-        que_count++;
-        que_numb++;
-        showQuetions(que_count);
-        queCounter(que_numb);
-        next_btn.classList.remove("show");
+        que_count++;//add to qustion count to pull next question
+        que_numb++; // add to the question number 
+        showQuetions(que_count); // pulls the next question based on the count number
+        queCounter(que_numb); // displays next number on question list
+        next_btn.classList.remove("show");//removes next button
     } else
-        showResult();
+        showResult();//will show the result of the quiz
 });
 
-//if deducting time and time becomes negative then
-// -- end game function
+function showResult(){
+    info_box.classList.remove("activeInfo"); //hide quiz section 
+    quiz_box.classList.remove("activeQuiz"); //hide quiz section
+    result_box.classList.add("activeResult"); //show result box
+    const scoreText = result_box.querySelector(".score_text");
+    stopTimer();//stop the timer
+    let resultTime = timeValue
+    console.log(resultTime); //record timeValue to consolelog, this will be the score
+    if (resultTime > 40){ // if user had more than 40 seconds left
+        //creating a new span tag and passing the user score number and total question number
+        let scoreTag = '<span>and congrats! , You had <p>'+ resultTime +'</p> seconds left.</span>';
+        scoreText.innerHTML = scoreTag;  //adding new span tag inside score_Text
+    }
+    else if(resultTime > 30){ // if user had more than 30 seconds left
+        let scoreTag = '<span>and nice , You had <p>'+ resultTime +'</p> seconds left.</span>';
+        scoreText.innerHTML = scoreTag;
+    }
+    else if (resultTime <=29){ // if user had less than 20 seconds left
+        let scoreTag = '<span>and sorry , You had only <p>'+ resultTime +'</p> seconds left.</span>';
+        scoreText.innerHTML = scoreTag;
+    }
+    else if(resultTime <= 0){ // if user had more than 20 seconds left
+        let scoreTag = '<span>and sorry , You ran out of time.</span>';
+        scoreText.innerHTML = scoreTag;
+    }
+};
 
-// if time remaining is positive move to next question
+// function storeScorelist (){
+//     localStorage.setItem("scoreList", JSON.stringify(scoreList));
+// }
 
-//click on answer in last question then
-//run end game function
+// function renderScorelist(){
+//     score_List_results.innerHTML = "";
+//     score_List_count.textContent = scoreList.length;
+//     for (var i=0; i < scoreList.length; i++){
+//         var nameList = scoreList[i];
+//         var li = document.createElement("li");
+//         li.textContent = nameList;
+//         li.setAttribute("data-index",i);
+//         scoreList.appendChild(li);
+//     }
+// }
 
-// end game
-//show the end game page
-//stop the timer
-//hide the question section
 
-//end game section
-//if the user click on submit without input
-//show alert, tell the user to type in an input
+// result_form.addEventListener("submit", function(event){
+//     result_box.classList.remove("activeResult");
+//     form_container.classList.add("activeForm");
+//     event.preventDefault();
+//     //show alert, tell the user to type in an input
+//     var intialsUser = intialsUser_Input.value.trim();
+//         console.log("Initials", intialsUser);
+//     //if the user types in something and clicks submit
+//     if(!intialsUser) {
+//     return;
+//     };
+//     //store the user intial and high score in local storage
+// });
 
-//if the user types in something and clicks submit
-//stor the user intial and high score in local storage
-//hide the end game page
-//show the highscore page
-
-// high score page
-//show all the previous highscores
-//grab data from local storage
 
 //when user click on return to home -- redirect them to start page
