@@ -15,13 +15,13 @@ const bottom_ques_counter = document.querySelector("footer .total_que");
 const logScore_btn = document.querySelector(".buttons .logScore");
 const scoreCount = 10;
 const result_form = document.querySelector("#results_form");
-const intials_input = document.querySelector("#userInitials");
+const save_UserID = document.querySelector("#submitUserID");
 
 
 let timeValue = 60;
 let que_count = 0;
 let que_numb = 1;
-let userScore5;
+let userScore = 0;
 let counter;
 let counterLine
 let withValue = 0;
@@ -102,6 +102,8 @@ function optionSelected(answer){
     //check if the choice is correct or not
     if(userAns === correcAns){ 
         //if correct
+        //increase score by one
+        userScore +=1;
         //display correct feed back
         answer.classList.add("correct"); 
         console.log("Correct Answer");
@@ -110,6 +112,8 @@ function optionSelected(answer){
         //display wrong answer feedback
         answer.classList.add("incorrect"); //adding red color to correct selected option
         console.log("Wrong Answer");
+        //if there is 10 seconds or less on the clock end the game
+        //if more than 10 seconds on the clock
         //deduct 10 seconds from timer
         timeValue -=10;         
     
@@ -145,30 +149,77 @@ function showResult(){
     result_box.classList.add("activeResult"); //show result box
     const scoreText = result_box.querySelector(".score_text");
     stopTimer();//stop the timer
-    let resultTime = timeValue
-    console.log(resultTime); //record timeValue to consolelog, this will be the score
-    if (resultTime > 40){ // if user had more than 40 seconds left
+    
+    console.log(userScore); //record timeValue to consolelog, this will be the score
+    if (userScore > 3){ // if user scored more than 3
         //creating a new span tag and passing the user score number and total question number
-        let scoreTag = '<span>and congrats! , You had <p>'+ resultTime +'</p> seconds left.</span>';
+        let scoreTag = '<span>and congrats! , You got <p>'+ userScore + '<p> out of </p>' + questions.length + '</p></span>';
         scoreText.innerHTML = scoreTag;  //adding new span tag inside score_Text
     }
-    else if(resultTime > 30){ // if user had more than 30 seconds left
-        let scoreTag = '<span>and nice , You had <p>'+ resultTime +'</p> seconds left.</span>';
+    else if(userScore > 1){ // if user had more than 30 seconds left
+        let scoreTag = '<span>and nice , You got <p>'+ userScore + '<p> out of </p>' + questions.length + '</p></span>';
         scoreText.innerHTML = scoreTag;
     }
-    else if (resultTime <=29){ // if user had less than 20 seconds left
-        let scoreTag = '<span>and sorry , You had only <p>'+ resultTime +'</p> seconds left.</span>';
+    else {
+        let scoreTag = '<span>and sorry , You only had </p>' + userScore + '<p> out of </p>' + questions.length + '</p></span>';
         scoreText.innerHTML = scoreTag;
     }
-    else if(resultTime <= 0){ // if user had more than 20 seconds left
-        let scoreTag = '<span>and sorry , You ran out of time.</span>';
-        scoreText.innerHTML = scoreTag;
-    }
+
+    document.getElementById('scoreListCount').innerHTML=userScore;
 };
 
-// function storeScorelist (){
-//     localStorage.setItem("scoreList", JSON.stringify(scoreList));
-// }
+
+//log scores in local storage
+//recall from local storage to create leaderboard
+//present leaderboard after each quiz and scores are logged
+
+
+
+function storeScorelist (event){
+    event.preventDefault();
+    if(localStorage.getItem('scoreList')){
+        //get current localStorage values
+        var scoreBoard = JSON.parse(localStorage.getItem('scoreList'));
+        //adding new value to localStorage array
+        scoreBoard.push({name: intialsUser_Input.value ,score: userScore});
+        //saving amended array to local storage
+        localStorage.setItem("scoreList", JSON.stringify(scoreBoard));
+
+        // loop over the values
+        for (let index = 0; index < scoreBoard.length; index++) {
+            const element = scoreBoard[index];
+
+            const nameElement = document.createElement('td');
+            nameElement.innerHTML = element.name;
+
+            const scoreElement = document.createElement('td');
+            scoreElement.innerHTML = element.score;
+
+            // add to html
+            const rowElement =  document.createElement('tr');
+            rowElement.appendChild(nameElement)
+            rowElement.appendChild(scoreElement)
+
+            document.getElementById("score_list").appendChild(rowElement)
+            
+        }
+
+       
+
+
+
+        }else{
+      var scoreBoard = [{name: intialsUser_Input.value ,score: userScore}]  
+      localStorage.setItem("scoreList", JSON.stringify(scoreBoard));
+    }
+   
+
+
+   
+}
+
+save_UserID.addEventListener("click",storeScorelist);
+
 
 // function renderScorelist(){
 //     score_List_results.innerHTML = "";
