@@ -200,7 +200,6 @@ function storeScorelist (event){
             rowElement.appendChild(nameElement)
             rowElement.appendChild(scoreElement)
             document.getElementById("score_list").appendChild(rowElement)
-            
         }
     }else{
       var scoreBoard = [{name: intialsUser_Input.value ,score: userScore}]  

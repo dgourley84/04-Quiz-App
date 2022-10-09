@@ -365,12 +365,15 @@ footer button.show{
 .form_control input:focus{
   box-shadow: 0px 2px 4px rgba(0,0,0,0.08);
 }
+
 .form_control input::placeholder{
   color: #aaa;
 }
+
 .form_control input:focus::placeholder{
   color: #bfbfbf;
 }
+
 .form_control .buttons{
     display: flex;
     margin-top: 20px;
