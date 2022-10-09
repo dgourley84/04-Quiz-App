@@ -199,23 +199,12 @@ function storeScorelist (event){
             const rowElement =  document.createElement('tr');
             rowElement.appendChild(nameElement)
             rowElement.appendChild(scoreElement)
-
             document.getElementById("score_list").appendChild(rowElement)
-            
         }
-
-       
-
-
-
-        }else{
+    }else{
       var scoreBoard = [{name: intialsUser_Input.value ,score: userScore}]  
       localStorage.setItem("scoreList", JSON.stringify(scoreBoard));
     }
-   
-
-
-   
 }
 
 save_UserID.addEventListener("click",storeScorelist);
